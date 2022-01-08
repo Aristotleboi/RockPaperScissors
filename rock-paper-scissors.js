@@ -25,56 +25,61 @@ function playRound(playerSelection, computerSelection) {
     computerSelection = computerPlay();
     console.log(computerSelection);
     let message;
+    let winCondition;
     playerSelection = prompt("Rock, Paper, Scissors");
     //9 comparisons for each outcome of rock paper scissors
     if (playerSelection.toLowerCase() == 'rock' && computerSelection == 'scissors') {
+        winCondition = 2;
         message = 'You Win! ' + playerSelection + ' beats ' + computerSelection;
     } else if (playerSelection.toLowerCase() == 'rock' && computerSelection == 'rock') {
+        winCondition = 1;
         message = 'Draw';
     } else if (playerSelection.toLowerCase() == 'rock' && computerSelection == 'paper') {
+        winCondition = 0;
         message = 'You Lose! ' + computerSelection + ' beats ' + playerSelection;
     } else if (playerSelection.toLowerCase() == 'scissors' && computerSelection == 'paper') {
+        winCondition = 2;
         message = 'You Win! ' + playerSelection + ' beats ' + computerSelection;
     } else if (playerSelection.toLowerCase() == 'scissors' && computerSelection == 'scissors') {
+        winCondition = 1;
         message = 'Draw';
     } else if (playerSelection.toLowerCase() == 'scissors' && computerSelection == 'rock') {
+        winCondition = 0;
         message = 'You Lose! ' + computerSelection + ' beats ' + playerSelection;
     } else if (playerSelection.toLowerCase() == 'paper' && computerSelection == 'rock') {
+        winCondition = 2;
         message = 'You Win! ' + playerSelection + ' beats ' + computerSelection;
     } else if (playerSelection.toLowerCase() == 'paper' && computerSelection == 'paper') {
+        winCondition = 1;
         message = 'Draw';
     } else if (playerSelection.toLowerCase() == 'paper' && computerSelection == 'scissors') {
+        winCondition = 0;
         message = 'You Lose! ' + computerSelection + ' beats ' + playerSelection;
     }
-    return message;
+    console.log(message);
+    return winCondition;
 }
+
 
 // a function to keep score over 5 rounds
 function game() {
-    let win = "Win";
-    let lose = "Lose";
-    let roundMessage = playRound();
-    console.log(roundMessage);
-    if (roundMessage.indexOf(win)) {
-        console.log(roundMessage);
-        console.log("Your Score " + playerScore + "  CPU score " + computerScore);
+    let winState = playRound(playerSelection, computerSelection);
+    if (winState === 2) {
         return playerScore = playerScore + 1;
-    } else if (roundMessage.indexOf(lose)) {
-        console.log(roundMessage);
-        console.log("Your Score " + playerScore + "  CPU score " + computerScore);
+    } else if (winState === 1) {
+        console.log("draw");
+    } else if (winState === 0) {
         return computerScore = computerScore + 1;
-    } else {
-        console.log("Draw");
-        console.log("Your Score " + playerScore + "  CPU score " + computerScore);
-        return "Draw"
-    } 
-    
-    
-
+    }
 }
 
 console.log(game());
+console.log("Your Score:" + playerScore + "  CPU Score:" + computerScore);
 console.log(game());
+console.log("Your Score:" + playerScore + "  CPU Score:" + computerScore);
 console.log(game());
+console.log("Your Score:" + playerScore + "  CPU Score:" + computerScore);
 console.log(game());
+console.log("Your Score:" + playerScore + "  CPU Score:" + computerScore);
 console.log(game());
+console.log("Your Score:" + playerScore + "  CPU Score:" + computerScore);
