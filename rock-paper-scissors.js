@@ -26,7 +26,6 @@ function playRound(playerSelection, computerSelection) {
     console.log(computerSelection);
     let message;
     let winCondition;
-    playerSelection = prompt("Rock, Paper, Scissors");
     //9 comparisons for each outcome of rock paper scissors
     if (playerSelection.toLowerCase() == 'rock' && computerSelection == 'scissors') {
         winCondition = 2;
@@ -56,7 +55,7 @@ function playRound(playerSelection, computerSelection) {
         winCondition = 0;
         message = 'You Lose! ' + computerSelection + ' beats ' + playerSelection;
     }
-    console.log(message);
+    roundMessage = message;
     return winCondition;
 }
 
@@ -65,21 +64,64 @@ function playRound(playerSelection, computerSelection) {
 function game() {
     let winState = playRound(playerSelection, computerSelection);
     if (winState === 2) {
-        return playerScore = playerScore + 1;
+        playerScore = playerScore + 1;
+        return;
     } else if (winState === 1) {
         console.log("draw");
     } else if (winState === 0) {
-        return computerScore = computerScore + 1;
+        computerScore = computerScore + 1;
+        return;
     }
 }
 
-console.log(game());
-console.log("Your Score:" + playerScore + "  CPU Score:" + computerScore);
-console.log(game());
-console.log("Your Score:" + playerScore + "  CPU Score:" + computerScore);
-console.log(game());
-console.log("Your Score:" + playerScore + "  CPU Score:" + computerScore);
-console.log(game());
-console.log("Your Score:" + playerScore + "  CPU Score:" + computerScore);
-console.log(game());
-console.log("Your Score:" + playerScore + "  CPU Score:" + computerScore);
+const scores = document.querySelector('.scores');
+const player = document.createElement('div');
+player.classList.add('player');
+player.textContent = 'Players Score: ' + playerScore;
+scores.appendChild(player);
+const computer = document.createElement('div');
+computer.classList.add('computer');
+computer.textContent = 'Computer Score: ' + computerScore;
+scores.appendChild(computer);
+const gameMessages = document.querySelector('.message');
+const messageGame = document.createElement('div');
+messageGame.classList.add('messageGame');
+messageGame.textContent = 'Please Select One';
+gameMessages.appendChild(messageGame);
+
+
+
+// player selects one of threee buttons and a round is playes
+const rock = document.querySelector('#rock');
+rock.addEventListener('click', () => {
+    playerSelection = 'rock';
+    game();
+    player.textContent = 'Players Score: ' + playerScore;
+    computer.textContent = 'Computers score: ' + computerScore;
+    messageGame.textContent = roundMessage;
+});
+
+const paper = document.querySelector('#paper');
+paper.addEventListener('click', () => {
+    playerSelection = 'paper';
+    game();
+    player.textContent = 'Players Score: ' + playerScore;
+    computer.textContent = 'Computers score: ' + computerScore;
+    messageGame.textContent = roundMessage;
+});
+
+const scissors = document.querySelector('#scissors');
+scissors.addEventListener('click', () => {
+    playerSelection = 'scissors';
+    game();
+    player.textContent = 'Players Score: ' + playerScore;
+    computer.textContent = 'Computers score: ' + computerScore;
+    messageGame.textContent = roundMessage;
+});
+
+if (playerScore >= 5) {
+    console.log('player score reached 5');
+}
+if (computerScore >= 5) {
+    messageGame.textContent = 'Sorry You Lose!';
+}
