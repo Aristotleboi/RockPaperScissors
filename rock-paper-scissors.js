@@ -65,11 +65,18 @@ function game() {
     let winState = playRound(playerSelection, computerSelection);
     if (winState === 2) {
         playerScore = playerScore + 1;
+        if (playerScore === 5) {
+            alert("YOU WIN, CONGRAGULATIONS!");
+        }
         return;
     } else if (winState === 1) {
         console.log("draw");
+
     } else if (winState === 0) {
         computerScore = computerScore + 1;
+        if (computerScore === 5) {
+            alert("SORRY YOU LOOSE!");
+        }
         return;
     }
 }
@@ -118,10 +125,3 @@ scissors.addEventListener('click', () => {
     computer.textContent = 'Computers score: ' + computerScore;
     messageGame.textContent = roundMessage;
 });
-
-if (playerScore >= 5) {
-    console.log('player score reached 5');
-}
-if (computerScore >= 5) {
-    messageGame.textContent = 'Sorry You Lose!';
-}
